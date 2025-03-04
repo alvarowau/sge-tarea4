@@ -16,59 +16,84 @@ ahora dentro del contenedor nos dirijimos a "/mnt/extra-addons"
 * una vez creado
  una vez creado el modulo nos tendremos que dirigir al manifest.py año tedremos que añadir algo como esto
 {
-    'name': 'FormAABB',
-    'version': '1.0',
-    'category': 'Tools',
-    'summary': 'Módulo ficticio para la tarea de SGE04',
-    'description': 'Este módulo incluye un informe personalizado para clientes.',
-    'depends': ['base', 'contacts'],  # Dependencias: base y módulo de contactos
+    'name': 'formAABT',
+    'version': '1.0.0',
+    'summary': 'Generación de informes de clientes',
+    'description': 'Módulo para generar informes personalizados de clientes en Odoo.',
+    'category': 'Reporting',
+    'author': 'Alvaro',
+    'license': 'LGPL-3',
+    'website': 'https://github.com/alvarowau/sge-tarea4',
+    'depends': ['base'],
     'data': [
-        'views/report.xml',  # Cargará el archivo XML del informe
+        'views/report.xml',
+        'views/res_partner_views.xml',
     ],
     'installable': True,
-    'application': True,
+    'application': False,
 }
+
 
 despues en la carpeta views tendremos que añadir report.xml con algo como esto
 
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Definición del informe -->
-    <record id="report_customer_details" model="ir.actions.report">
-        <field name="name">Customer Details Report</field>
-        <field name="model">res.partner</field>  <!-- Modelo de clientes -->
-        <field name="report_type">qweb-pdf</field>  <!-- Formato del informe -->
-        <field name="report_name">formAABB.report_customer_details_template</field>
-        <!-- Eliminada la referencia a report.paperformat_euro -->
-        <field name="print_report_name">Customer_Details_Report.pdf</field>  <!-- Corregido: sin comillas simples -->
+    <record id="action_report_customer_list" model="ir.actions.report">
+        <field name="name">Lista de Clientes</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">formAABT.report_customer</field>
+        <field name="report_file">formAABT.report_customer</field>
     </record>
 
-    <!-- Plantilla del informe -->
-    <template id="report_customer_details_template">
-        <t t-call="web.html_container">
-            <t t-call="web.internal_layout">
+    <template id="report_customer">
+        <t t-call="web.external_layout">
+            <main>
                 <div class="page">
-                    <h2>Customer Details Report</h2>
-                    <table class="table table-bordered">
+                    <h2>Lista de Clientes</h2>
+                    <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Phone</th>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
                             <t t-foreach="docs" t-as="customer">
                                 <tr>
-                                    <td><span t-field="customer.name"/></td>
-                                    <td><span t-field="customer.phone"/></td>
-                                    <td><span t-field="customer.email"/></td>
+                                    <td><t t-esc="customer.name"/></td>
+                                    <td><t t-esc="customer.phone or ''"/></td>
+                                    <td><t t-esc="customer.email or ''"/></td>
                                 </tr>
                             </t>
                         </tbody>
                     </table>
                 </div>
-            </t>
+            </main>
         </t>
     </template>
 </odoo>
+
+
+ahora para que el boton imprimir salga en nuestro view tendremos que crear res_partner_views.xml con este contendio
+
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_tree_inherit_print_customer_list" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit.print.customer_list</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="js_class">list_view_with_print</attribute>
+            </xpath>
+            <xpath expr="//tree" position="inside">
+                <header>
+                    <button name="%(action_report_customer_list)d" string="Imprimir Lista de Clientes" type="action" class="oe_highlight"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Definición de la acción de reporte -->
     <record id="action_report_customer_list" model="ir.actions.report">
+        <!-- Nombre del reporte visible para el usuario -->
         <field name="name">Lista de Clientes</field>
+
+        <!-- Modelo sobre el que se ejecuta el reporte -->
         <field name="model">res.partner</field>
+
+        <!-- Tipo de reporte, en este caso PDF generado con QWeb -->
         <field name="report_type">qweb-pdf</field>
+
+        <!-- Nombre técnico del reporte, debe coincidir con el ID de la plantilla -->
         <field name="report_name">formAABT.report_customer</field>
+
+        <!-- Archivo base del reporte, usualmente igual al report_name -->
         <field name="report_file">formAABT.report_customer</field>
     </record>
 
+    <!-- Plantilla del reporte en QWeb -->
     <template id="report_customer">
+        <!-- Usa la estructura predeterminada de Odoo para reportes -->
         <t t-call="web.external_layout">
             <main>
                 <div class="page">
+                    <!-- Título del reporte -->
                     <h2>Lista de Clientes</h2>
+
+                    <!-- Tabla con los datos de los clientes -->
                     <table class="table table-sm">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Telefono</th>
+                                <th>Teléfono</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Itera sobre los registros de clientes -->
                             <t t-foreach="docs" t-as="customer">
                                 <tr>
                                     <td><t t-esc="customer.name"/></td>

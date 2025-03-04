@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Hereda la vista de lista (tree view) de res.partner para agregar un botón de impresión -->
     <record id="view_partner_tree_inherit_print_customer_list" model="ir.ui.view">
+
+        <!-- Nombre interno de la vista para identificarla en Odoo -->
         <field name="name">res.partner.tree.inherit.print.customer_list</field>
+
+        <!-- Modelo al que se aplica la vista -->
         <field name="model">res.partner</field>
+
+        <!-- Hereda la vista de lista de contactos existente -->
         <field name="inherit_id" ref="base.view_partner_tree"/>
+
         <field name="arch" type="xml">
+            <!-- Agrega una clase JavaScript a la vista de lista -->
             <xpath expr="//tree" position="attributes">
                 <attribute name="js_class">list_view_with_print</attribute>
             </xpath>
+
+            <!-- Agrega un botón en el encabezado de la vista de lista -->
             <xpath expr="//tree" position="inside">
                 <header>
-                    <button name="%(action_report_customer_list)d" string="Imprimir Lista de Clientes" type="action" class="oe_highlight"/>
+                    <button name="%(action_report_customer_list)d"
+                            string="Imprimir Lista de Clientes"
+                            type="action"
+                            class="oe_highlight"/>
                 </header>
             </xpath>
         </field>
