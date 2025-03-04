@@ -1,0 +1,74 @@
+* poner contenedores en ejecucion
+- antes de nada tenemos que poner los contenedores en ejecucion, con el servicio de docker corriendo en la consola nos dirijimos a la carpeta contendora, en este caso "sge-tarea5" y en la consola hacemos un "docker compose up -d" ahora ponemos el
+
+
+* entramos al contenedor
+usamos el comando:
+    -- docker exec -it sge-tarea5-web-1 bash
+ahora dentro del contenedor nos dirijimos a "/mnt/extra-addons"
+
+
+* creamos el modulo
+- nos situamos en la carpeta dev_addons y  con el comando scaffold creamos el modulo
+ -- odoo scaffold formAABB
+
+
+* una vez creado
+ una vez creado el modulo nos tendremos que dirigir al manifest.py año tedremos que añadir algo como esto
+{
+    'name': 'FormAABB',
+    'version': '1.0',
+    'category': 'Tools',
+    'summary': 'Módulo ficticio para la tarea de SGE04',
+    'description': 'Este módulo incluye un informe personalizado para clientes.',
+    'depends': ['base', 'contacts'],  # Dependencias: base y módulo de contactos
+    'data': [
+        'views/report.xml',  # Cargará el archivo XML del informe
+    ],
+    'installable': True,
+    'application': True,
+}
+
+despues en la carpeta views tendremos que añadir report.xml con algo como esto
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Definición del informe -->
+    <record id="report_customer_details" model="ir.actions.report">
+        <field name="name">Customer Details Report</field>
+        <field name="model">res.partner</field>  <!-- Modelo de clientes -->
+        <field name="report_type">qweb-pdf</field>  <!-- Formato del informe -->
+        <field name="report_name">formAABB.report_customer_details_template</field>
+        <!-- Eliminada la referencia a report.paperformat_euro -->
+        <field name="print_report_name">Customer_Details_Report.pdf</field>  <!-- Corregido: sin comillas simples -->
+    </record>
+
+    <!-- Plantilla del informe -->
+    <template id="report_customer_details_template">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <h2>Customer Details Report</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="customer">
+                                <tr>
+                                    <td><span t-field="customer.name"/></td>
+                                    <td><span t-field="customer.phone"/></td>
+                                    <td><span t-field="customer.email"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

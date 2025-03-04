@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_tree_inherit_print_customer_list" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit.print.customer_list</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="js_class">list_view_with_print</attribute>
+            </xpath>
+            <xpath expr="//tree" position="inside">
+                <header>
+                    <button name="%(action_report_customer_list)d" string="Imprimir Lista de Clientes" type="action" class="oe_highlight"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>

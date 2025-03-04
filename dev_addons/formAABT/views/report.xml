@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_customer_list" model="ir.actions.report">
+        <field name="name">Lista de Clientes</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">formAABT.report_customer</field>
+        <field name="report_file">formAABT.report_customer</field>
+    </record>
+
+    <template id="report_customer">
+        <t t-call="web.external_layout">
+            <main>
+                <div class="page">
+                    <h2>Lista de Clientes</h2>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="customer">
+                                <tr>
+                                    <td><t t-esc="customer.name"/></td>
+                                    <td><t t-esc="customer.phone or ''"/></td>
+                                    <td><t t-esc="customer.email or ''"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </t>
+    </template>
+</odoo>
