@@ -1,0 +1,55 @@
+a) Creación de un procedimiento para mostrar datos de un cliente específico
+Para crear un procedimiento que muestre el nombre, la provincia y el país de un cliente determinado, utilizamos la siguiente consulta:
+sql
+Copiar
+Editar
+CREATE OR REPLACE PROCEDURE mostrar_cliente(cliente_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    SELECT nombre, provincia, pais
+    FROM clientes
+    WHERE id = cliente_id;
+END;
+$$;
+Este procedimiento recibe el cliente_id como parámetro y devuelve el nombre, la provincia y el país del cliente correspondiente.
+
+b) Creación de un trigger para almacenar datos en la tabla "milog"
+A continuación, creamos un trigger que almacene información básica de los clientes cuando se agreguen nuevos registros:
+sql
+Copiar
+Editar
+-- Creación de la tabla milog
+CREATE TABLE milog (
+    user_id INT,
+    cliente_id INT,
+    create_date TIMESTAMP
+);
+
+-- Creación del trigger
+CREATE OR REPLACE FUNCTION log_cliente_insert()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO milog (user_id, cliente_id, create_date)
+    VALUES (NEW.user_id, NEW.id, NOW());
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Asignación del trigger a la tabla clientes
+CREATE TRIGGER trigger_log_cliente
+AFTER INSERT ON clientes
+FOR EACH ROW
+EXECUTE FUNCTION log_cliente_insert();
+Este trigger se activa después de cada inserción de un cliente en la tabla clientes y guarda el user_id, el cliente_id y la create_date en la tabla milog.
+
+c) Verificación de la tabla "milog"
+Para asegurarse de que la tabla "milog" se rellene correctamente en todos los casos, debes probar los siguientes escenarios:
+Inserción desde la interfaz de Odoo: Crea un cliente a través de la interfaz de Odoo y verifica si el registro aparece en la tabla milog.
+
+Importación desde CSV: Realiza una importación de clientes desde un archivo CSV y asegúrate de que la tabla milog se actualice con los datos correspondientes.
+
+Inserción manual desde PostgreSQL: Inserta manualmente un cliente en la tabla clientes desde PostgreSQL y verifica que la tabla milog también se actualice con los datos correctos.
+
+Este ejercicio garantiza que todos los registros nuevos de clientes queden registrados en la tabla de logs milog, independientemente del método de inserción utilizado.
+
