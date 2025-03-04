@@ -1,0 +1,4 @@
+"Nombre","Categoría de producto","# Productos","Coste","Precio de venta","Puede ser comprado","Puede ser vendido","Tipo","Impuestos cliente","UdM de compra"
+"nombreproducto1","cosmética","","0","0","True","True","Producto almacenable","IVA 21% (Bienes)","Unidades"
+"nombreproducto2","cosmética","","0","0","True","True","Producto almacenable","IVA 21% (Bienes)","Unidades"
+"nombreproducto3","cosmética","","0","0","True","True","Producto almacenable","IVA 21% (Bienes)","Unidades"
