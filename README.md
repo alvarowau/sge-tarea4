@@ -72,14 +72,14 @@ Esta tarea demuestra la capacidad de implantar Odoo 17 en una empresa mediante d
 - Desarrollo del código necesario para diseñar un informe que muestre los clientes con sus datos básicos: nombre, teléfono y correo electrónico.
 - Modificación del archivo `__manifest__.py` del módulo para incluir el informe en los elementos cargados.
 
-**La solución completa está disponible en** [ejercicio1.md](./ejercicio1.md).
+**La solución completa está disponible en** [ejercicio1](./ejercicio1.md).
 
 ## Ejercicio 2: Migración de datos (4 puntos)
 
 - Creación de un archivo CSV con los datos de tres clientes arbitrarios y posterior importación en Odoo 17. Se documentan los errores encontrados y sus respectivas soluciones.
 - Importación de un archivo CSV de ejemplo con datos de productos en la tabla correspondiente del módulo "Inventario" de Odoo. Se detallan los errores detectados y las soluciones implementadas.
 
-**La solución completa está disponible en** [ejercicio2.md](./ejercicio2.md).
+**La solución completa está disponible en** [ejercicio2](./ejercicio2.md).
 
 ## Ejercicio 3: Actualización masiva de datos desde pgAdmin4 (3 puntos)
 
@@ -87,4 +87,4 @@ Esta tarea demuestra la capacidad de implantar Odoo 17 en una empresa mediante d
 - Implementación de un *trigger* que registre en la tabla `milog` información básica sobre los clientes recién creados (`user_id`, `id`, `create_date`).
 - Verificación de que la tabla `milog` se complete correctamente en todos los casos, ya sea desde la interfaz de Odoo, la importación de datos desde un archivo CSV o la inserción manual en PostgreSQL.
 
-**La solución completa está disponible en** [ejercicio3.md](./ejercicio3.md).
+**La solución completa está disponible en** [ejercicio3](./ejercicio3.md).
