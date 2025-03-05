@@ -1,4 +1,4 @@
-```markdown
+
 # Acceso al contenedor de Odoo
 Para trabajar dentro del entorno de Odoo, se debe acceder al contenedor que contiene la instancia en ejecución:
 
@@ -138,5 +138,3 @@ Luego, en la interfaz web de Odoo:
 
 # Conclusión
 Se ha implementado un informe personalizado en Odoo 17 dentro de un módulo ficticio llamado `formAABB`. Este informe permite generar un listado de clientes en formato PDF con su nombre, teléfono y correo electrónico. Además, se ha integrado un botón en la vista de clientes para facilitar su acceso. El listado de clientes se puede obtener desde la sección de contactos, ya que usa la misma vista.
-```
-
