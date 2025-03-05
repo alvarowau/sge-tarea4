@@ -36,7 +36,7 @@ Para levantar el contenedor Docker y ejecutar la aplicación, sigue estos pasos:
 
    Una vez que los contenedores estén corriendo, podrás acceder a Odoo a través de tu navegador web en la siguiente URL:
 
-   ```
+   ```plaintext
    http://localhost:8069
    ```
 

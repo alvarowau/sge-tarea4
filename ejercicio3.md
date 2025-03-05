@@ -40,8 +40,8 @@ CREATE TABLE milog (
     create_date TIMESTAMP DEFAULT now()
 );
 ```
-![create funcion](imagenes/ejercicio3/creacion_tabla.png)
 
+![create funcion](imagenes/ejercicio3/creacion_tabla.png)
 
 ### 2. Creación de la función que se ejecutará con el trigger
 
@@ -66,6 +66,7 @@ AFTER INSERT ON res_partner
 FOR EACH ROW
 EXECUTE FUNCTION log_new_client();
 ```
+
 ![create trigger](imagenes/ejercicio3/creaccion_tigger.png)
 
 ## c) Verificación de la tabla `milog`
@@ -87,8 +88,8 @@ Luis Fernández,+34944555666,luis.fernandez@email.com,Calle Estrella 56,Zaragoza
 Sofía Ruiz,+34977888999,sofia.ruiz@email.com,Calle Marte 78,Málaga,29001,España
 Jorge Gómez,+34900111222,jorge.gomez@email.com,Calle Júpiter 90,Bilbao,48001,España
 ```
-![create users csv ](imagenes/ejercicio3/creacion_csv.png)
 
+![create users csv ](imagenes/ejercicio3/creacion_csv.png)
 
 ### Creación de un cliente mediante SQL
 
@@ -96,6 +97,7 @@ Jorge Gómez,+34900111222,jorge.gomez@email.com,Calle Júpiter 90,Bilbao,48001,E
 INSERT INTO res_partner (name, create_uid, create_date, email, phone)
 VALUES ('Álvaro sql', 1, NOW(), 'alvaro-sql@gmail.com', '3454645');
 ```
+
 ![create user sql](imagenes/ejercicio3/creacion_sql.png)
 
 ### Verificación de los registros en la tabla `milog`

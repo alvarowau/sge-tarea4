@@ -1,5 +1,6 @@
 
 # Acceso al contenedor de Odoo
+
 Para trabajar dentro del entorno de Odoo, se debe acceder al contenedor que contiene la instancia en ejecución:
 
 ```bash
@@ -13,6 +14,7 @@ cd /mnt/extra-addons
 ```
 
 # Creación del módulo "formAABB"
+
 Dentro de la carpeta "extra-addons", se debe crear la estructura del módulo:
 
 ```bash
@@ -23,6 +25,7 @@ touch formAABB/__init__.py formAABB/__manifest__.py
 El archivo `__init__.py` se deja vacío inicialmente.
 
 # Configuración del `__manifest__.py`
+
 El archivo `__manifest__.py` define la configuración básica del módulo. Se debe editar y agregar el siguiente contenido:
 
 ```python
@@ -46,6 +49,7 @@ El archivo `__manifest__.py` define la configuración básica del módulo. Se de
 ```
 
 # Creación del informe en `report.xml`
+
 Dentro de la carpeta `views/`, se debe crear un archivo llamado `report.xml` que contendrá la definición del informe:
 
 ```xml
@@ -90,6 +94,7 @@ Dentro de la carpeta `views/`, se debe crear un archivo llamado `report.xml` que
 ```
 
 # Integración del botón "Imprimir Lista de Clientes"
+
 Se debe crear el archivo `res_partner_views.xml` dentro de `views/`:
 
 ```xml
@@ -111,6 +116,7 @@ Se debe crear el archivo `res_partner_views.xml` dentro de `views/`:
 ```
 
 # Instalación y prueba del módulo
+
 Para activar el módulo `formAABB`, ejecutar:
 
 ```bash
@@ -118,6 +124,7 @@ odoo -u formAABB --stop-after-init
 ```
 
 Luego, en la interfaz web de Odoo:
+
 - Navegar a "Aplicaciones".
 - Buscar "formAABB".
 
@@ -133,8 +140,8 @@ Luego, en la interfaz web de Odoo:
 
 - Visualizar el documento generado en PDF.
 
-
 ![activar](imagenes/ejercicio1/impresion_pdf_clientes.png)
 
 # Conclusión
+
 Se ha implementado un informe personalizado en Odoo 17 dentro de un módulo ficticio llamado `formAABB`. Este informe permite generar un listado de clientes en formato PDF con su nombre, teléfono y correo electrónico. Además, se ha integrado un botón en la vista de clientes para facilitar su acceso. El listado de clientes se puede obtener desde la sección de contactos, ya que usa la misma vista.
