@@ -1,21 +1,5 @@
-Implementación de un informe personalizado en Odoo 17
-
-En esta tarea se llevará a cabo la creación de un informe personalizado en Odoo 17, siguiendo un proceso estructurado que garantizará su correcta integración dentro del sistema. Para ello, se utilizará un módulo ficticio llamado "formAABB", que permitirá generar un informe con los datos básicos de los clientes: nombre, teléfono y correo electrónico.
-
-1. Puesta en marcha del entorno
-Antes de proceder con la creación del informe, es necesario asegurarse de que los contenedores de Odoo estén en ejecución. Para ello, con Docker instalado y el servicio corriendo, se debe ejecutar lo siguiente en la terminal:
-
-- Navegar a la carpeta del proyecto que contiene el archivo docker-compose.yml. En este caso, la carpeta es "sge-tarea5".
-- Ejecutar el siguiente comando para iniciar los contenedores en segundo plano:
-  ```bash
-  docker compose up -d
-  ```
-- Verificar que los contenedores estén corriendo con:
-  ```bash
-  docker ps
-  ```
-
-2. Acceso al contenedor de Odoo
+```markdown
+# Acceso al contenedor de Odoo
 Para trabajar dentro del entorno de Odoo, se debe acceder al contenedor que contiene la instancia en ejecución:
 
 ```bash
@@ -28,7 +12,7 @@ Dentro del contenedor, navegar hasta la carpeta donde se encuentran los módulos
 cd /mnt/extra-addons
 ```
 
-3. Creación del módulo "formAABB"
+# Creación del módulo "formAABB"
 Dentro de la carpeta "extra-addons", se debe crear la estructura del módulo:
 
 ```bash
@@ -36,10 +20,10 @@ mkdir -p formAABB/views
 touch formAABB/__init__.py formAABB/__manifest__.py
 ```
 
-El archivo "__init__.py" se deja vacío inicialmente.
+El archivo `__init__.py` se deja vacío inicialmente.
 
-4. Configuración del "__manifest__.py"
-El archivo "__manifest__.py" define la configuración básica del módulo. Se debe editar y agregar el siguiente contenido:
+# Configuración del `__manifest__.py`
+El archivo `__manifest__.py` define la configuración básica del módulo. Se debe editar y agregar el siguiente contenido:
 
 ```python
 {
@@ -61,8 +45,8 @@ El archivo "__manifest__.py" define la configuración básica del módulo. Se de
 }
 ```
 
-5. Creación del informe en "report.xml"
-Dentro de la carpeta "views/", se debe crear un archivo llamado "report.xml" que contendrá la definición del informe:
+# Creación del informe en `report.xml`
+Dentro de la carpeta `views/`, se debe crear un archivo llamado `report.xml` que contendrá la definición del informe:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -105,8 +89,8 @@ Dentro de la carpeta "views/", se debe crear un archivo llamado "report.xml" que
 </odoo>
 ```
 
-6. Integración del botón "Imprimir Lista de Clientes"
-Se debe crear el archivo "res_partner_views.xml" dentro de "views/":
+# Integración del botón "Imprimir Lista de Clientes"
+Se debe crear el archivo `res_partner_views.xml` dentro de `views/`:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -126,8 +110,8 @@ Se debe crear el archivo "res_partner_views.xml" dentro de "views/":
 </odoo>
 ```
 
-7. Instalación y prueba del módulo
-Para activar el módulo "formAABB", ejecutar:
+# Instalación y prueba del módulo
+Para activar el módulo `formAABB`, ejecutar:
 
 ```bash
 odoo -u formAABB --stop-after-init
@@ -136,9 +120,23 @@ odoo -u formAABB --stop-after-init
 Luego, en la interfaz web de Odoo:
 - Navegar a "Aplicaciones".
 - Buscar "formAABB".
-- Instalar el módulo.
-- Ir a "Contactos" y verificar que el botón "Imprimir Lista de Clientes" aparece en la interfaz.
 
-Conclusión
-Se ha implementado un informe personalizado en Odoo 17 dentro de un módulo ficticio llamado "formAABB". Este informe permite generar un listado de clientes en formato PDF con su nombre, teléfono y correo electrónico. Además, se ha integrado un botón en la vista de clientes para facilitar su acceso.
+![Buscar app](imagenes/ejercicio1/busca_app.png)
+![activar](imagenes/ejercicio1/detalles_modulo.png)
+
+- Activar el módulo.
+- Ir a "Clientes".
+- Seleccionar los clientes que deseamos imprimir y hacer clic en "Imprimir Lista de Clientes".
+
+![Buscar app](imagenes/ejercicio1/crm_clientes.png)
+![activar](imagenes/ejercicio1/seleccion_clientes.png)
+
+- Visualizar el documento generado en PDF.
+
+
+![activar](imagenes/ejercicio1/impresion_pdf_clientes.png)
+
+# Conclusión
+Se ha implementado un informe personalizado en Odoo 17 dentro de un módulo ficticio llamado `formAABB`. Este informe permite generar un listado de clientes en formato PDF con su nombre, teléfono y correo electrónico. Además, se ha integrado un botón en la vista de clientes para facilitar su acceso. El listado de clientes se puede obtener desde la sección de contactos, ya que usa la misma vista.
+```
 

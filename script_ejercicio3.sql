@@ -18,6 +18,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
+
+
 -- Creación de la tabla milog para registrar logs
 CREATE TABLE milog (
     log_id SERIAL PRIMARY KEY,
